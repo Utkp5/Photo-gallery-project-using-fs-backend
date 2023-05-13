@@ -16,16 +16,16 @@ const addPhoto = async(req,res) => {
             return res.status(401).send(`Image size should be less then 1mb `);
         }
 
-        const created = new galleryModel();
-        console.log(created);
+        const created = new galleryModel(req.fields);
 
         if (photo) {
-            created.photo.data = fs.readFileSync(image.path);
-            created.photo.contentType = image.type;
-        }
-        const final = await created.save();
+            created.photo.data = fs.readFileSync(photo.path);
+            created.photo.contentType = photo.type;
 
-        return res.status(200).send(`uploaded successfully`,final);
+            const final = await created.save();
+            return res.status(200).send({message : `uploaded successfully`,final});
+        }
+
 
 
 
