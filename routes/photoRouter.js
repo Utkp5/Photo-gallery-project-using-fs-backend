@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { addPhoto, getPhoto, getPhotos, updatePhoto, deletePhoto } = require('../controllers/photoC');
 const router = express.Router();
 
 
@@ -6,16 +7,16 @@ const router = express.Router();
 router.post('/add-photo', addPhoto);
 
 //get photo
-router.get('/get-photo', addPhoto);
+router.get('/get-photo', getPhoto);
 
 //get all photos
-router.get('/get-all-photo', addPhoto);
+router.get('/get-all-photo', getPhotos);
 
 //update-photo
-router.put('/update-photo', addPhoto);
+router.put('/update-photo', updatePhoto);
 
 //delete photo
-router.delete('/delete-photo', addPhoto);
+router.delete('/delete-photo', deletePhoto);
 
 
 module.exports = router;
