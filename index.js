@@ -19,7 +19,7 @@ dotenv.config();
 
 
 //db connection
-const dbconnect = require('./service/dbConfig');;
+const dbconnect = require('./service/dbConfig');
 dbconnect();
 
 
