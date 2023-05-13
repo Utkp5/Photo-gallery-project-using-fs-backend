@@ -24,7 +24,8 @@ dbconnect();
 
 
 //router
-
+const router = require('./routes/photoRouter');
+app.use('/api/Gallery', router);
 
 
 
