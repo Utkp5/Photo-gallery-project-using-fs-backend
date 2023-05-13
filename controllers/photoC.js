@@ -17,6 +17,7 @@ const addPhoto = async(req,res) => {
         }
 
         const created = new galleryModel();
+        console.log(created);
 
         if (photo) {
             created.photo.data = fs.readFileSync(image.path);

@@ -1,7 +1,7 @@
 const express = require('express');
 const { addPhoto, getPhoto, getPhotos, updatePhoto, deletePhoto } = require('../controllers/photoC');
 const router = express.Router();
-const formidable = require('formidable')
+const formidable = require('express-formidable')
 
 
 //add photo
