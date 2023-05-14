@@ -89,8 +89,10 @@ const updatePhoto = async(req,res) => {
             photo : req.files,
             category : req.fields
         }
+        
+        const final = await galleryModel.findByIdAndUpdate(id,data,{new:true});
 
-        return res.status(200).send(getall);
+        return res.status(200).send(final);
         
     } catch (error) {
         console.log(error)
@@ -101,7 +103,23 @@ const updatePhoto = async(req,res) => {
 
 //delete
 const deletePhoto = async(req,res) => {
+
     try {
+
+        const id = req.params.id;
+
+        const del = await galleryModel.findById({id});
+
+        if (!del) {
+            return res.status(400).send(`No data found`);
+        }
+
+                
+        const final = await galleryModel.findByIdAndDelete(id);
+
+        if (final) {
+            return res.status(200).send(`deleted successfully`);
+        }
         
     } catch (error) {
         console.log(error)
