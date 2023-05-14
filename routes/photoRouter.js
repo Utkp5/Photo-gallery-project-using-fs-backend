@@ -8,16 +8,16 @@ const formidable = require('express-formidable')
 router.post('/add-photo', formidable(), addPhoto);
 
 //get photo
-router.get('/get-photo', getPhoto);
+router.get('/get-photo/:id', getPhoto);
 
 //get all photos
 router.get('/get-all-photo', getPhotos);
 
 //update-photo
-router.put('/update-photo', updatePhoto);
+router.put('/update-photo/:_id', updatePhoto);
 
 //delete photo
-router.delete('/delete-photo', deletePhoto);
+router.delete('/delete-photo/:id', deletePhoto);
 
 
 module.exports = router;

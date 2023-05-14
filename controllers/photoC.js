@@ -12,7 +12,7 @@ const addPhoto = async(req,res) => {
         if (!category || !photo) {
             return res.status(401).send(`Something u are missing`);
         }
-        if (photo.size > 1000000) {
+        if (photo.size > 100000) {
             return res.status(401).send(`Image size should be less then 1mb `);
         }
 
@@ -27,11 +27,8 @@ const addPhoto = async(req,res) => {
         }
 
 
-
-
     } catch (error) {
         console.log(error)
-        
     }
 }
 
@@ -40,9 +37,19 @@ const addPhoto = async(req,res) => {
 const getPhoto = async(req,res) => {
     try {
         
+        const _id = req.params.id
+
+        const getall = await galleryModel.findById({_id});
+
+        if (!getall) {
+            return res.status(400).send(`No data found`);
+        }
+
+        return res.status(200).send(getall);
+        
+
     } catch (error) {
         console.log(error)
-        
     }
 }
 
@@ -50,6 +57,14 @@ const getPhoto = async(req,res) => {
 //getall
 const getPhotos = async(req,res) => {
     try {
+
+        const getall = await galleryModel.find({});
+
+        if (!getall) {
+            return res.status(400).send(`No data found`);
+        }
+
+        return res.status(200).send(getall);
         
     } catch (error) {
         console.log(error)
@@ -60,7 +75,22 @@ const getPhotos = async(req,res) => {
 
 //update
 const updatePhoto = async(req,res) => {
+
     try {
+        const id = req.params._id;
+
+        const update = await galleryModel.findById({id});
+
+        if (!update) {
+            return res.status(400).send(`No data found`);
+        }
+
+        const data = {
+            photo : req.files,
+            category : req.fields
+        }
+
+        return res.status(200).send(getall);
         
     } catch (error) {
         console.log(error)
