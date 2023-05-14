@@ -79,7 +79,7 @@ const updatePhoto = async(req,res) => {
     try {
         const id = req.params._id;
 
-        const update = await galleryModel.findById({id});
+        const update = await galleryModel.findById(id);
 
         if (!update) {
             return res.status(400).send(`No data found`);
@@ -90,7 +90,7 @@ const updatePhoto = async(req,res) => {
             category : req.fields
         }
         
-        const final = await galleryModel.findByIdAndUpdate(id,data,{new:true});
+        const final = await galleryModel.findByIdAndUpdate(id, data, {new:true});
 
         return res.status(200).send(final);
         
@@ -108,7 +108,7 @@ const deletePhoto = async(req,res) => {
 
         const id = req.params.id;
 
-        const del = await galleryModel.findById({id});
+        const del = await galleryModel.findById(id);
 
         if (!del) {
             return res.status(400).send(`No data found`);
