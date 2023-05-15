@@ -73,6 +73,27 @@ const getPhotos = async(req,res) => {
 }
 
 
+//getphoto only
+const getPhotosOnly = async(req,res) => {
+
+    try {
+
+        const getphoto = await galleryModel.findById(req.params.pid).select('photo');
+
+        if (getphoto.photo.data) {
+
+            res.set("Content-type", getphoto.photo.contentType);
+            return res.status(200).send(getphoto.photo.data);
+        }
+
+        return res.status(200).send(getphoto);
+    } catch (error) {
+        
+    }
+}
+
+
+
 //update
 const updatePhoto = async(req,res) => {
 
@@ -128,4 +149,4 @@ const deletePhoto = async(req,res) => {
 }
 
 
-module.exports = {addPhoto,getPhoto,getPhotos,updatePhoto,deletePhoto};
+module.exports = {addPhoto,getPhoto,getPhotos,updatePhoto,deletePhoto, getPhotosOnly};
