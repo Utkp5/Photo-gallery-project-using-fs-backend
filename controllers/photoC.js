@@ -106,12 +106,23 @@ const updatePhoto = async(req,res) => {
             return res.status(400).send(`No data found`);
         }
 
-        const data = {
-            photo : req.files,
-            category : req.fields
+        const {category} = req.fields;
+        const {photo} = req.files;
+
+        if (!category || !photo) {
+            return res.status(401).send(`Something u are missing`);
+        }
+        if (photo.size > 100000) {
+            return res.status(401).send(`Image size should be less then 1mb `);
         }
         
-        const final = await galleryModel.findByIdAndUpdate(id, data, {new:true});
+        const final = await galleryModel.findByIdAndUpdate(id, {...req.fields}, {new:true});
+
+        if (photo) {
+            final.photo.data = fs.readFileSync(photo.path);
+            final.photo.contentType = photo.type;
+        }
+        await final.save();
 
         return res.status(200).send(final);
         
