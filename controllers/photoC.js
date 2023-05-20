@@ -39,7 +39,7 @@ const getPhoto = async(req,res) => {
         
         const _id = req.params.id
 
-        const getall = await galleryModel.findById({_id});
+        const getall = await galleryModel.findById({_id}).select('-photo');
 
         if (!getall) {
             return res.status(400).send(`No data found`);
@@ -58,7 +58,7 @@ const getPhoto = async(req,res) => {
 const getPhotos = async(req,res) => {
     try {
 
-        const getall = await galleryModel.find({});
+        const getall = await galleryModel.find({}).select('-photo');
 
         if (!getall) {
             return res.status(400).send(`No data found`);
